@@ -77,7 +77,15 @@ docker pull ghcr.io/connext/router:latest
 #create env config key file
 cp .env.example .env
 sleep 2
-wget -O config.json https://raw.githubusercontent.com/NunoyHaxxana/nxtp-router-docker-config/main/config.json
+wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/blob/main/config.json
 sleep 2
-wget -O key.yaml https://raw.githubusercontent.com/NunoyHaxxana/nxtp-router-docker-config/main/key.yaml
+wget -O key.yaml https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/blob/main/key.yaml
 sleep 2
+
+#Paste private key to key.yaml
+sed -i 's/your_privatekey/'$Private_Key'/g' key.yaml
+sleep 2
+docker-compose down
+sleep 2
+docker compose up -d
+echo -e "Your Router \e[32minstalled and works\e[39m!"
