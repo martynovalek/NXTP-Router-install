@@ -51,6 +51,7 @@ read -p "Insert your Private_Key from Metamask: " Private_Key
 echo 'export Private_Key='\"${Private_Key}\" >> $HOME/connext/your.key
 fi
 
+#update and install packages
 apt update && apt install git sudo unzip wget -y
 
 #install docker
@@ -72,12 +73,15 @@ git checkout amarok
 sleep 2 
 docker pull ghcr.io/connext/router:latest
 
-#create env config key file
+#create .env, config and key files
 cp .env.example .env
 sleep 2
-wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/blob/main/config.json
+wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/main/config.json
 sleep 2
-wget -O key.yaml https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/blob/main/key.yaml
+wget -O key.yaml https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/main/key.yaml
+sleep 2
+#delete example files
+rm config.example.json .env.example key.example.yaml
 sleep 2
 
 #Paste private key to key.yaml
