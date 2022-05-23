@@ -7,7 +7,7 @@
     "port": 6379
   },
   "server": {
-    "adminToken": "abacus",
+    "adminToken": "onetwothree",
     "port": 8080
   },
   "chains": {
