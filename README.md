@@ -127,7 +127,7 @@ docker-compose up -d
 cd ~/connext/nxtp-router-docker-compose
 docker-compose down
 docker system prune -a
-rm -rf $HOME/connext
+cd && rm -rf $HOME/connext
 ```
 
 
