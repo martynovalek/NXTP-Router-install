@@ -50,7 +50,7 @@ git clone https://github.com/connext/nxtp-router-docker-compose.git
 cd $HOME/connext/nxtp-router-docker-compose
 git checkout amarok
 ```
-**Get the Router version 0.2.-alpha.16**
+**Get the Router version 0.2.0-alpha.16**
 ```
 docker pull ghcr.io/connext/router:0.2.0-alpha.16
 ```
