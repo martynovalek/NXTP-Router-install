@@ -110,7 +110,9 @@ You can check the latest version here: https://github.com/connext/nxtp/releases
 **Enter new version instead of <new_ver>:**
 ```
 NEW="<new_ver>"
-
+```
+Modify the `.env` file:
+```
 CURRENT=$(cat .env | grep ROUTER_VERSION | awk -F '=' '{print$2}')
 sed -i.bak -e "s/$CURRENT/$NEW/" .env
 ```
