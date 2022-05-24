@@ -104,17 +104,20 @@ docker-compose restart
 ```
 ---
 #### Update Router Version:
-Open and modify `.env` to change ROUTER_VERSION<br>
+We have to modify `.env` to change ROUTER_VERSION<br>
 You can check the latest version here: https://github.com/connext/nxtp/releases
 
+**Enter new version instead of <new_ver>:**
 ```
-cd $HOME/connext/nxtp-router-docker-compose
-nano .env
-```
+NEW="<new_ver>"
 
-<pre>
-<kbd>Ctrl</kbd>+<kbd>X</kbd> then <kbd>y</kbd> - to save the changes
-</pre> 
+CURRENT=$(cat .env | grep ROUTER_VERSION | awk -F '=' '{print$2}')
+sed -i.bak -e "s/$CURRENT/$NEW/" .env
+```
+Check current version in `.env` file:
+```
+cat .env | grep ROUTER_VERSION | awk -F '=' '{print$2}'
+```
 
 **Now update the stack:**
 ```
