@@ -7,7 +7,7 @@
     "port": 6379
   },
   "server": {
-    "adminToken": "onetwothree",
+    "adminToken": "abacus",
     "port": 8080
   },
   "chains": {
@@ -18,7 +18,7 @@
           "name": "TEST"
         }
       ],
-      "providers": ["https://rinkeby.infura.io/v3/23c46c583faa48afad44c690761bb2f9"]
+      "providers": ["https://rinkeby.infura.io/v3/224d26fcdc02495c921bb5d74702002e"]
     },
     "2221": {
       "providers": ["https://kovan.infura.io/v3/224d26fcdc02495c921bb5d74702002e"],
