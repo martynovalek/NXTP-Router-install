@@ -1,4 +1,4 @@
-# Install NXTP Router version 0.2.0-alpha.16
+# Spinning up NXTP Router version 0.2.0-alpha.16 + update
 
 >**Minimum Hardware Requirements**<br>
 >:black_square_button: 8GB RAM<br>
