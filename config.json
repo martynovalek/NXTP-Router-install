@@ -18,10 +18,10 @@
           "name": "TEST"
         }
       ],
-      "providers": ["https://rinkeby.infura.io/v3/38f8f85747014e87b48035d84398a97c"]
+      "providers": ["https://rinkeby.infura.io/v3/224d26fcdc02495c921bb5d74702002e", "https://rpc.ankr.com/eth_rinkeby"]
     },
     "2221": {
-      "providers": ["https://kovan.infura.io/v3/38f8f85747014e87b48035d84398a97c"],
+      "providers": ["https://kovan.infura.io/v3/224d26fcdc02495c921bb5d74702002e"],
       "assets": [
         {
           "address": "0xB5AabB55385bfBe31D627E2A717a7B189ddA4F8F",
@@ -30,7 +30,7 @@
       ]
     },
         "3331": {
-      "providers": ["https://kovan.infura.io/v3/38f8f85747014e87b48035d84398a97c"],
+      "providers": ["https://kovan.infura.io/v3/224d26fcdc02495c921bb5d74702002e"],
       "assets": [
         {
           "address": "0xd426e23a6a9524101cdc017e01ddc3262b7aa65d",
