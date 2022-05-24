@@ -1,4 +1,4 @@
-#For latest version router
+#For version router: 0.2.0-alpha.16
 #!/bin/bash
 exists()
 {
@@ -34,7 +34,7 @@ echo -e ' ============@#######+--------------------**+====+**=========== '
 echo -e ' ============@#####=======================##@====+**=========== '
 echo -e ' ===============###============@#####=====##@====+**=========== '
 echo -e ' ===============###=======================##@================== '
-echo -e ' ===============###==================@@@@@###@@@@@@@=========== '
+echo -e ' ===============###==================-----###-------=========== '
 echo -e ' ===============###=================%###############%========== '
 echo -e ' ===============###==========#######@::::::::::::*==###======== '
 echo -e ' ===============###=================%###############%========== '
@@ -71,7 +71,7 @@ cd $HOME/connext/nxtp-router-docker-compose
 sleep 2 
 git checkout amarok
 sleep 2 
-docker pull ghcr.io/connext/nxtp-router:latest
+docker pull ghcr.io/connext/router:0.2.0-alpha.16
 
 #create .env, config and key files
 cp .env.example .env
@@ -87,6 +87,11 @@ sleep 2
 #Paste private key to key.yaml
 sed -i 's/your_privatekey/'$Private_Key'/g' key.yaml
 sleep 2
+
+#Paste router version to .env file
+sed -i 's/latest/0.2.0-alpha.16/g' .env
+sleep 2
+
 docker-compose down
 sleep 2
 docker compose up -d
