@@ -121,8 +121,15 @@ Check current version in `.env` file:
 cat .env | grep ROUTER_VERSION | awk -F '=' '{print$2}'
 ```
 
+Refresh the `config.json` file:
+```
+rm config.json
+wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/main/config.json
+```
+
 **Now update the stack:**
 ```
+docker-compose down
 docker-compose pull
 docker-compose up -d
 ```
