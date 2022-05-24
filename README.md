@@ -87,7 +87,7 @@ sed -i 's/latest/0.2.0-alpha.16/g' .env
 Ensure your currently directory is `$HOME/connext/nxtp-router-docker-compose`
 ```
 docker-compose down
-docker compose up -d
+docker-compose up -d
 ```
 
 **Check logs:**
