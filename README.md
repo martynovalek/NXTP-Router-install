@@ -83,10 +83,9 @@ sed -i 's/your_privatekey/'$PRIVATE_KEY'/g' key.yaml
 sed -i 's/latest/0.2.0-alpha.16/g' .env
 ```
 
-**7. Run your Router**
+**7. Run your Router**<br>
+Ensure your currently directory is `$HOME/connext/nxtp-router-docker-compose`
 ```
-cd $HOME/connext/nxtp-router-docker-compose
-
 docker-compose down
 docker compose up -d
 ```
