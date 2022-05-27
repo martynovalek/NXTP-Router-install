@@ -127,12 +127,13 @@ rm config.json
 wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-install/main/config.json
 ```
 
-**Now update the stack:**
+**Now update the stack and check logs:**
 ```
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose down
 docker-compose pull
 docker-compose up -d
+docker logs --follow --tail 100 router
 ```
 ---
 #### Delete Router and everything relating to it:
