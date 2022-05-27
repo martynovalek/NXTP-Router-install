@@ -113,12 +113,12 @@ NEW="<new_ver>"
 ```
 Modify the `.env` file:
 ```
-CURRENT=$(cat .env | grep ROUTER_VERSION | awk -F '=' '{print$2}')
+CURRENT=$(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')
 sed -i.bak -e "s/$CURRENT/$NEW/" .env
 ```
 Check current version in `.env` file:
 ```
-cat .env | grep ROUTER_VERSION | awk -F '=' '{print$2}'
+cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}'
 ```
 
 Refresh the `config.json` file:
