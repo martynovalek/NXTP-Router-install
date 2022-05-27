@@ -129,6 +129,7 @@ wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-i
 
 **Now update the stack:**
 ```
+cd $HOME/connext/nxtp-router-docker-compose
 docker-compose down
 docker-compose pull
 docker-compose up -d
