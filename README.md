@@ -9,7 +9,7 @@
 1. Prepare in advance a **private key of your wallet** from Metamask. You should enter it right after running the script.<br>
 For safety reason create a new wallet address for router.
 
-2. **Setup provider endpoints.** Then you'll add it to config.toml file to use your own.
+2. **Setup provider endpoints.** Then you'll add it to `config.json` file to use your own.
 For that we will use the nodes provided by the service [Infura](https://infura.io/). 
 
   2.1 Register at [infura.io](https://infura.io/) and create new project:
