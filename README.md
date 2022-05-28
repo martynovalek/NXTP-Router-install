@@ -12,7 +12,7 @@ For safety reason create a new wallet address for router.
 2. **Setup provider endpoints.** Then you'll add it to config.toml file to use your own.
 For that we will use the nodes provided by the service [Infura](https://infura.io/). 
 
-  2.1 Register at infura.io and create new project:
+  2.1 Register at [infura.io](https://infura.io/) and create new project:
   
   <img width="1000" alt="Снимок экрана 2022-05-28 в 13 04 44" src="https://user-images.githubusercontent.com/88688304/170812549-0cc07f55-abae-4ad4-9ede-6a9ba7d812ce.png">
 
