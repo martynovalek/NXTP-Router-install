@@ -1,4 +1,4 @@
-#For version router: 0.2.0-alpha.16
+#For version router: 0.2.0-beta.8
 #!/bin/bash
 exists()
 {
@@ -51,6 +51,12 @@ read -p "Insert your Private_Key from Metamask: " Private_Key
 echo 'export Private_Key='\"${Private_Key}\" >> $HOME/connext/your.key
 fi
 
+sleep 2
+if [ ! $Project_ID ]; then
+read -p "Insert your Project ID from Infura: " Project_ID
+echo 'export Project_ID='\"${Project_ID}\" >> $HOME/connext/infura.key
+fi
+
 #update and install packages
 apt update && apt install git sudo unzip wget -y
 
@@ -71,7 +77,7 @@ cd $HOME/connext/nxtp-router-docker-compose
 sleep 2 
 git checkout amarok
 sleep 2 
-docker pull ghcr.io/connext/router:0.2.0-alpha.16
+docker pull ghcr.io/connext/router:0.2.0-beta.8
 
 #create .env, config and key files
 cp .env.example .env
@@ -84,12 +90,16 @@ sleep 2
 rm config.example.json .env.example key.example.yaml
 sleep 2
 
+#Paste project ID to config.json
+sed -i 's/224d26fcdc02495c921bb5d74702002e/'$Project_ID'/g' $HOME/connext/nxtp-router-docker-compose/config.json
+sleep 2
+
 #Paste private key to key.yaml
 sed -i 's/your_privatekey/'$Private_Key'/g' key.yaml
 sleep 2
 
 #Paste router version to .env file
-sed -i 's/latest/0.2.0-alpha.16/g' .env
+sed -i 's/latest/0.2.0-beta.8/g' .env
 sleep 2
 
 docker-compose down
