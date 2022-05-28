@@ -126,6 +126,10 @@ cd $HOME/connext/nxtp-router-docker-compose
 docker logs --follow --tail 100 router
 ```
 
+Now you can check data of your provider at infura.io
+<img width="1000" alt="Снимок экрана 2022-05-28 в 12 50 19" src="https://user-images.githubusercontent.com/88688304/170814579-3c421ab0-3ff4-4b7a-8715-b131f2ea7c2e.png">
+
+
 ## Additional commands
 #### Restart Docker:
 ```
