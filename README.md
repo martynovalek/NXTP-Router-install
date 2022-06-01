@@ -137,20 +137,28 @@ cd $HOME/connext/nxtp-router-docker-compose
 docker-compose restart
 ```
 ---
-#### Update Router Version:
-We have to modify `.env` to change ROUTER_VERSION<br>
+#### Update Router Version:<br>
 You can check the latest version here: https://github.com/connext/nxtp/releases
 
-**Enter new version instead of <new_ver>:**
+**Check current version of Router:**<br>
+The output will show you which current version
 ```
-NEW="<new_ver>"
+CURRENT=$(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}') && echo $CURRENT
 ```
+
+**Check new version of Router:**<br>
+The output will show you which new version
+```
+NEW="$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')" && echo $NEW
+```
+
+**If you need to update run the commands below:**<br>
 Modify the `.env` file:
 ```
-CURRENT=$(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')
 sed -i.bak -e "s/$CURRENT/$NEW/" $HOME/connext/nxtp-router-docker-compose/.env
 ```
-Check current version in `.env` file:
+
+**Ensure `.env` file has a new version:**
 ```
 cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}'
 ```
