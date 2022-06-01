@@ -1,4 +1,4 @@
-# Spinning up NXTP Router version 0.2.0-beta.8 + update
+# Spinning up NXTP latest Router version + update
 
 >**Minimum Hardware Requirements**<br>
 >:black_square_button: 8GB RAM<br>
@@ -35,7 +35,7 @@ wget -q -O nxtp-router.sh https://raw.githubusercontent.com/martynovalek/NXTP-Ro
 ```
 Just after you run the script, you need to insert the private key, and then the project ID.
 
-Then whait just for 2 min. As the installing is finished you will see `"Your Router installed and works!"`
+Then whait just for 2 min. As the installing is finished you will see `"Your Router v.XXXX installed and works!"`
 
 Check router logs:
 ```
