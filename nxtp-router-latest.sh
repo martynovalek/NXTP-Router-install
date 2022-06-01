@@ -1,4 +1,4 @@
-#For version router: 0.2.0-beta.8
+#For latest version router
 #!/bin/bash
 exists()
 {
