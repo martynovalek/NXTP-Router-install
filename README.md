@@ -14,17 +14,17 @@ For that we will use the nodes provided by the service [Infura](https://infura.
 
   2.1 Register at [infura.io](https://infura.io/) and create new project:
   
-  <img width="1000" alt="Снимок экрана 2022-05-28 в 13 04 44" src="https://user-images.githubusercontent.com/88688304/170812549-0cc07f55-abae-4ad4-9ede-6a9ba7d812ce.png">
+  <img width="1000" alt="screenshot" src="https://user-images.githubusercontent.com/88688304/170812549-0cc07f55-abae-4ad4-9ede-6a9ba7d812ce.png">
 
-<img width="1000" alt="Снимок экрана 2022-05-28 в 12 39 32" src="https://user-images.githubusercontent.com/88688304/170812576-f7d57b0f-b455-4cab-b6fb-8cdf48f148b8.png">
+<img width="1000" alt="screenshot" src="https://user-images.githubusercontent.com/88688304/170812576-f7d57b0f-b455-4cab-b6fb-8cdf48f148b8.png">
 
   2.2 Open settings:
   
-  <img width="1000" alt="Снимок экрана 2022-05-28 в 12 42 54" src="https://user-images.githubusercontent.com/88688304/170812595-66f5557e-8fc3-42c8-a08e-82ff270bcab2.png">
+  <img width="1000" alt="screenshot" src="https://user-images.githubusercontent.com/88688304/170812595-66f5557e-8fc3-42c8-a08e-82ff270bcab2.png">
 
   2.3 And copy your project ID. It will be the same on any network
   
-  <img width="1000" alt="Снимок экрана 2022-05-28 в 12 44 21" src="https://user-images.githubusercontent.com/88688304/170812613-de163f51-3cd6-4a47-aeda-680d812e3b53.png">
+  <img width="1000" alt="screenshot" src="https://user-images.githubusercontent.com/88688304/170812613-de163f51-3cd6-4a47-aeda-680d812e3b53.png">
 
 **Keep this data handy, you will need it for further installation**
 
@@ -71,9 +71,9 @@ git clone https://github.com/connext/nxtp-router-docker-compose.git
 cd $HOME/connext/nxtp-router-docker-compose
 git checkout amarok
 ```
-**Get the Router version 0.2.0-beta.8**
+**Get the latest Router version**
 ```
-docker pull ghcr.io/connext/router:0.2.0-beta.8
+docker pull ghcr.io/connext/router:$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')
 ```
 
 **4. Create .env, config and key files:**
@@ -110,7 +110,7 @@ sed -i 's/224d26fcdc02495c921bb5d74702002e/'$PROJECT_ID'/g' $HOME/connext/nxtp-r
 
 **7. Setup `.env` file**
 ```
-sed -i 's/latest/0.2.0-beta.8/g' .env
+sed -i 's/latest/'$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')'/g' .env
 ```
 
 **8. Run your Router**<br>
@@ -127,7 +127,7 @@ docker logs --follow --tail 100 router
 ```
 
 Now you can check data of your provider at infura.io
-<img width="1000" alt="Снимок экрана 2022-05-28 в 12 50 19" src="https://user-images.githubusercontent.com/88688304/170814579-3c421ab0-3ff4-4b7a-8715-b131f2ea7c2e.png">
+<img width="1000" alt="screenshot_infura" src="https://user-images.githubusercontent.com/88688304/170814579-3c421ab0-3ff4-4b7a-8715-b131f2ea7c2e.png">
 
 
 ## Additional commands
