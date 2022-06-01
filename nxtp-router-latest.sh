@@ -77,7 +77,9 @@ cd $HOME/connext/nxtp-router-docker-compose
 sleep 2 
 git checkout amarok
 sleep 2 
-docker pull ghcr.io/connext/router:$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')
+curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}' > router.version
+sleep 2 
+docker pull ghcr.io/connext/router:$(cat $HOME/connext/nxtp-router-docker-compose/router.version)
 
 #create .env, config and key files
 cp .env.example .env
@@ -99,10 +101,10 @@ sed -i 's/your_privatekey/'$Private_Key'/g' key.yaml
 sleep 2
 
 #Paste router version to .env file
-sed -i 's/latest/$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')/g' .env
+sed -i 's/latest/'$(cat $HOME/connext/nxtp-router-docker-compose/router.version)'/g' .env
 sleep 2
 
 docker-compose down
 sleep 2
 docker compose up -d
-echo -e "\e[32mYour Router v.$(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}') \e[32minstalled and works\e[39m!"
+echo -e "\e[32mYour Router v.$(cat $HOME/connext/nxtp-router-docker-compose/router.version) \e[32minstalled and works\e[39m!"
