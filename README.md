@@ -71,9 +71,11 @@ git clone https://github.com/connext/nxtp-router-docker-compose.git
 cd $HOME/connext/nxtp-router-docker-compose
 git checkout amarok
 ```
+
 **Get the latest Router version**
 ```
-docker pull ghcr.io/connext/router:$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')
+LATEST="$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')" && echo $LATEST
+docker pull ghcr.io/connext/router:$LATEST
 ```
 
 **4. Create .env, config and key files:**
@@ -110,7 +112,7 @@ sed -i 's/224d26fcdc02495c921bb5d74702002e/'$PROJECT_ID'/g' $HOME/connext/nxtp-r
 
 **7. Setup `.env` file**
 ```
-sed -i 's/latest/'$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')'/g' .env
+sed -i 's/latest/'$LATEST'/g' .env
 ```
 
 **8. Run your Router**<br>
