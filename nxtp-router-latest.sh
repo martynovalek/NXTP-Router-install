@@ -107,4 +107,5 @@ sleep 2
 docker-compose down
 sleep 2
 docker compose up -d
-echo -e "\e[32mYour Router v.$(cat $HOME/connext/nxtp-router-docker-compose/router.version) \e[32minstalled and works\e[39m!"
+echo -e "\e[32mYour Router v.$(cat $HOME/connext/nxtp-router-docker-compose/router.version) \e[32mseems be running.\e[39m"
+echo -e "Check logs using command: docker logs --follow --tail 100 router"
