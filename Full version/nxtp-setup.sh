@@ -90,8 +90,12 @@ git checkout amarok
 
 
 function createConfig {
+echo " "
+read -p "Insert your Project ID from Infura: " Project_ID
 cd $HOME/connext/nxtp-router-docker-compose
-cp config.example.json config.json
+wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-setup/main/Full%20version/config.json
+sed -i 's/project_ID/'${Project_ID}'/g' $HOME/connext/nxtp-router-docker-compose/config.json
+sleep 2
 }
 
 
@@ -107,17 +111,16 @@ cp config.example.json config.json
 #docker pull ghcr.io/connext/router:$(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)
 #}
 
+
 function upvernxtp {
 cd $HOME/connext/nxtp-router-docker-compose
 cp .env.example .env
 docker image ls --all ghcr.io/connext/router |head -2 | tail -1 |awk {'print $2'} > nxtp.version
 echo " "
-echo -e "\e[1m\e[32mLast NXTP Version : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
+echo -e "\e[1m\e[32mLatest NXTP Version : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
 sed -i 's/latest/'$(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)'/g' .env
 docker pull ghcr.io/connext/router:$(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)
 }
-
-
 
 
 function manupvernxtp {
@@ -131,19 +134,19 @@ docker pull ghcr.io/connext/router:${nxtpv}
 }
 
 
-
 function setautokeyfile {
 cd $HOME/connext/nxtp-router-docker-compose
 cp key.example.yaml key.yaml
 sed -i 's/dkadkjasjdlkasdladadasda/'$(cat $HOME/connext/router_private_key.json)'/g' key.yaml
 }
 
+
 function setyourkeyfile {
 echo " "
 echo -e "\e[1m\e[32mPreparing your Private Key ... \e[0m" && sleep 1
 cd $HOME/connext/nxtp-router-docker-compose
 cp key.example.yaml key.yaml
-read -p "Insert your Private Key with out 0x: " yourpk
+read -p "Insert your Private Key from Metamask: " yourpk
 sed -i 's/dkadkjasjdlkasdladadasda/'${yourpk}'/g' key.yaml
 }
 
@@ -166,12 +169,14 @@ cd $HOME/connext/nxtp-router-docker-compose
 docker-compose pull
 }
 
+
 function dockerdown {
 echo " "
 echo -e "\e[1m\e[32mPreparing down Router ... \e[0m" && sleep 1
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose down
 }
+
 
 function dockerup {
 echo " "
@@ -180,16 +185,16 @@ cd $HOME/connext/nxtp-router-docker-compose
 docker-compose up -d
 }
 
+
 function delete {
 echo " "
 echo -e "\e[1m\e[32mPreparing Delete Router ... \e[0m" && sleep 1
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose down
+docker system prune -a
 cd $HOME
-rm -rf $HOME/connext/nxtp-router-docker-compose
+rm -rf $HOME/connext
 }
-
-
 
 
 
