@@ -11,12 +11,13 @@ echo " ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚
 echo -e "\e[0m"          
 echo "=============================================================="
 #Made by Haxxana
-sleep 3
+sleep 1
 echo " "
 
 
 
 function Installingrequiredtool {
+echo " "
 echo -e "\e[1m\e[32mInstalling required tool ... \e[0m" && sleep 1
 sudo apt install curl -y < "/dev/null"
 apt update && apt install git sudo unzip wget -y < "/dev/null"
@@ -117,7 +118,7 @@ cd $HOME/connext/nxtp-router-docker-compose
 cp .env.example .env
 curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}' > nxtp.version
 echo " "
-echo -e "\e[1m\e[32mLatest NXTP Version : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
+echo -e "\e[1m\e[32mLatest NXTP Version: $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
 sed -i 's/latest/'$(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)'/g' .env
 docker pull ghcr.io/connext/router:$(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)
 }
@@ -206,7 +207,8 @@ select opt in "${options[@]}"
 do
     case $opt in
         "Install + Auto PKey")
-            echo -e '\e[1m\e[32mYou choose Install Router with auto Private Key ...\e[0m' && sleep 1
+echo " "
+echo -e '\e[1m\e[32mYou choose Install Router with auto Private Key ...\e[0m' && sleep 1
 Installingrequiredtool
 Installingdocker
 installnxtp
@@ -224,7 +226,8 @@ break
 ;;
 
 "Install + Your PKey")
-            echo -e '\e[1m\e[32mYou choose Install Router with your Private Key ...\e[0m' && sleep 1
+echo " "
+echo -e '\e[1m\e[32mYou choose Install Router with your Private Key ...\e[0m' && sleep 1
 Installingrequiredtool
 Installingdocker
 installnxtp
@@ -240,7 +243,8 @@ break
 ;;
 
 "Auto Upgrade")
-            echo -e '\e[1m\e[32mYou choose Upgrade Version ...\e[0m' && sleep 1
+echo " "
+echo -e '\e[1m\e[32mYou choose Upgrade Version ...\e[0m' && sleep 1
 dockerdown
 upvernxtp
 dockerpull
@@ -252,7 +256,8 @@ break
 ;;
 
 "Manual Upgrade")
-            echo -e '\e[1m\e[32mYou choose Manual Upgrade Version ...\e[0m' && sleep 1
+echo " "
+echo -e '\e[1m\e[32mYou choose Manual Upgrade Version ...\e[0m' && sleep 1
 dockerdown
 manupvernxtp
 dockerpull
@@ -265,13 +270,15 @@ break
 
 
 "Backup PKey")
+echo " "
 echo -e '\e[1m\e[32mYou choose Backup Private Key ...\e[0m' && sleep 1
 backupPK
 break
 
 ;;
 "Delete")
-echo -e '\e[1m\e[32mYou choose Delete All Router File and Data ...\e[0m' && sleep 1
+echo " "
+echo -e '\e[1m\e[32mYou choose Delete All Router Files and Data ...\e[0m' && sleep 1
 delete
 break
 
@@ -280,6 +287,6 @@ break
 break
 ;;
 
-*) echo -e "\e[91minvalid option $REPLY\e[0m";;
+*) echo -e "\e[91mInvalid option $REPLY\e[0m";;
     esac
 done
