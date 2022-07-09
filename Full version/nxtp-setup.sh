@@ -40,8 +40,9 @@ echo " "
 docker compose version
 if [ $? -ne 0 ]
 then
-echo -e "\e[1m\e[32mInstalling Docker Compose v2.5.1 ... \e[0m" && sleep 1
-curl -SL https://github.com/docker/compose/releases/download/v2.5.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+DOCKER_VER="$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/docker/compose/releases/latest | awk 'BEGIN{FS="v"} {print $2}')"
+echo -e "\e[1m\e[32mInstalling Docker Compose latest v$DOCKER_VER ... \e[0m" && sleep 1
+curl -SL https://github.com/docker/compose/releases/download/v$DOCKER_VER/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo chown $USER /var/run/docker.sock
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
@@ -94,6 +95,7 @@ function createConfig {
 echo " "
 read -p "Insert your Project ID from Infura: " Project_ID
 cd $HOME/connext/nxtp-router-docker-compose
+echo -e "\e[1m\e[32mPreparing config ... \e[0m" && sleep 1
 wget -O config.json https://raw.githubusercontent.com/martynovalek/NXTP-Router-setup/main/Full%20version/config.json
 sed -i 's/project_ID/'${Project_ID}'/g' $HOME/connext/nxtp-router-docker-compose/config.json
 sleep 2
@@ -149,6 +151,7 @@ cd $HOME/connext/nxtp-router-docker-compose
 cp key.example.yaml key.yaml
 read -p "Insert your Private Key from Metamask: " yourpk
 sed -i 's/dkadkjasjdlkasdladadasda/'${yourpk}'/g' key.yaml
+echo -e "\e[1m\e[32mYour Key has been writen into key.yaml ... \e[0m" && sleep 1
 }
 
 
@@ -176,6 +179,7 @@ echo " "
 echo -e "\e[1m\e[32mPreparing down Router ... \e[0m" && sleep 1
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose down
+sleep 2
 }
 
 
@@ -184,6 +188,7 @@ echo " "
 echo -e "\e[1m\e[32mPreparing Start Router ... \e[0m" && sleep 1
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose up -d
+sleep 2
 }
 
 
@@ -236,7 +241,8 @@ coreversion_amarok
 upvernxtp
 createConfig
 setyourkeyfile
-dockerpull
+dockerdown
+#dockerpull
 dockerup
 echo -e "\e[1m\e[32mYour Router was Install!\e[0m" && sleep 1
 break
