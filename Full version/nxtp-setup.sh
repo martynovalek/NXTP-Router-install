@@ -19,14 +19,13 @@ echo " "
 function Installingrequiredtool {
 echo " "
 echo -e "\e[1m\e[32mInstalling required tool ... \e[0m" && sleep 1
-sudo apt install curl -y < "/dev/null"
-apt update && apt install git sudo unzip wget -y < "/dev/null"
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl git sudo unzip wget -y < "/dev/null"
 }
 
 
 function Installingdocker {
 echo " "
-echo -e "\e[1m\e[32mInstalling Docker ... \e[0m" && sleep 1
 if ! command -v docker &> /dev/null
 then
 echo " "
