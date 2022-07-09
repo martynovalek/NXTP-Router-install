@@ -125,6 +125,16 @@ docker pull ghcr.io/connext/router:$(cat $HOME/connext/nxtp-router-docker-compos
 }
 
 
+function upgrade {
+CURRENT=$(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')
+echo -e "\e[1m\e[32mCurrent installed NXTP Version: $CURRENT\e[0m" && sleep 1
+NEW="$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')"
+echo -e "\e[1m\e[32mNew NXTP Version: $NEW\e[0m" && sleep 1
+sed -i.bak -e "s/$CURRENT/$NEW/" $HOME/connext/nxtp-router-docker-compose/.env
+echo -e "\e[1m\e[32mPreparing to upgrade ... \e[0m" && sleep 1
+}
+
+
 function manupvernxtp {
 cd $HOME/connext/nxtp-router-docker-compose
 read -p "Insert Router Version: " nxtpv 
@@ -222,10 +232,12 @@ upvernxtp
 createConfig
 createpk
 setautokeyfile
-dockerpull
+#dockerpull
 dockerup
 echo -e "\e[1m\e[32mYour Router was Install!\e[0m" && sleep 1
-echo -e "\e[1m\e[92mYour Private Key:  \e[0m" $(cat $HOME/connext/router_private_key.json)&& sleep 1
+echo -e "Check logs: docker logs --follow --tail 100 router"
+echo -e "\e[1m\e[92mYour Private Key:  \e[0m" $(cat $HOME/connext/router_private_key.json)
+echo -e "\e[1m\e[92mHas been saved at $HOME/connext/router_private_key.json\e[0m" && sleep 1
 break
 ;;
 
@@ -240,21 +252,25 @@ coreversion_amarok
 upvernxtp
 createConfig
 setyourkeyfile
-dockerdown
+#dockerdown
 #dockerpull
 dockerup
 echo -e "\e[1m\e[32mYour Router was Install!\e[0m" && sleep 1
+echo -e "Check logs: docker logs --follow --tail 100 router"
+sleep 1
 break
 ;;
 
 "Auto Upgrade")
 echo " "
 echo -e '\e[1m\e[32mYou choose Upgrade Version ...\e[0m' && sleep 1
+upgrade
 dockerdown
-upvernxtp
+#upvernxtp
 dockerpull
 dockerup
-echo -e "\e[1m\e[32mYour Router was upgraded to : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
+#echo -e "\e[1m\e[32mYour Router was upgraded to : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
+echo -e "\e[1m\e[32mYour Router was upgraded to: $(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')\e[0m" && sleep 1
 break
 
 
