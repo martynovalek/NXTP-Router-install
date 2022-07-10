@@ -227,8 +227,12 @@ echo -e "\e[1m\e[32mYour current version: $(cat $HOME/connext/nxtp-router-docker
 
 function logs {
 . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n router_log -v "docker logs --follow --tail 100 router" -a
+echo " ";
+echo "======================================";
+echo -e "Check logs using command: \e[1m\e[32mrouter_log\e[0m";
+echo -e "Open menu using command: \e[1m\e[32mrouter_menu\e[0m";
+echo "======================================";
 echo " "
-echo -e "Check logs using command: \e[1m\e[32mrouter_log\e[0m"
 }
 
 
