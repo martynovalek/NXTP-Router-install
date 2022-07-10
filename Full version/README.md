@@ -2,7 +2,7 @@
 # Spinning up NXTP Router full version guide.
 ## Automatic script, manual installing commands, liquidity providing.
 
-+ Using the automatic script you can spin up a router from scratch or upgrade an existing one to the last or another one version you like to. 
++ Using the automatic script you can spin up a router from scratch or upgrade to the latest or another one version you like to. 
 #### What is in:
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/88688304/178146039-058cacdc-13cb-4bc1-83b8-9ab65dbb4b2a.png">
 
@@ -52,12 +52,11 @@ For that we will use the nodes provided by the service [Infura](https://infura.
 
 # Quick router setup
 Copy and paste this code to run script in your terminal.<br>
-A menu will be displayed.<br>
-Choose install to setup Router and follow instructions.
+> Select install menu to setup Router and follow instructions.
+> During the installation you will need to insert the private key from Metamask (not your public address), and the project ID from Infura.
 ```
 wget -q -O nxtp-router.sh https://raw.githubusercontent.com/martynovalek/NXTP-Router-setup/main/Full%20version/nxtp-setup.sh && chmod +x nxtp-router.sh && . <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n router_menu -v "cd $HOME; sudo /bin/bash nxtp-router.sh" -a && router_menu
 ```
-During the installation you will need to insert the private key from Metamask (not your public address), and then the project ID from Infura.
 The script will add a command to the system to view the logs as a variable.<br>
 - To **view logs** use `router_log`
 - To **open menu** use `router_menu`
@@ -149,14 +148,36 @@ Now you can check data of your provider at infura.io
 <img width="1000" alt="screenshot_infura" src="https://user-images.githubusercontent.com/88688304/170814579-3c421ab0-3ff4-4b7a-8715-b131f2ea7c2e.png">
 
 
-## Additional commands
+## Usefull commands
+#### Open Router menu:
+```
+router_menu
+```
+#### Check logs:
+Add this command as variable:
+```
+. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n router_log -v "docker logs --follow --tail 100 router" -a
+```
+Check logs:
+```
+router_log
+```
+
 #### Restart Docker:
 ```
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose restart
 ```
+
+#### Delete Router and everything relating to it:
+```
+cd ~/connext/nxtp-router-docker-compose
+docker-compose down
+docker system prune -a
+cd && rm -rf $HOME/connext
+```
 ---
-#### Update Router Version:<br>
+## Update Router Version:<br>
 You can check the latest version here: https://github.com/connext/nxtp/releases
 
 **Check current version of Router:**<br>
@@ -191,11 +212,5 @@ docker-compose up -d
 docker logs --follow --tail 100 router
 ```
 ---
-#### Delete Router and everything relating to it:
-```
-cd ~/connext/nxtp-router-docker-compose
-docker-compose down
-docker system prune -a
-cd && rm -rf $HOME/connext
-```
 
+# Liquidity and testnet
