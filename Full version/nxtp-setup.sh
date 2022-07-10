@@ -46,6 +46,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo chown $USER /var/run/docker.sock
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 fi
+sudo systemctl restart docker
 }
 
 
@@ -137,10 +138,11 @@ echo -e "\e[1m\e[32mPreparing to upgrade ... \e[0m" && sleep 1
 
 function manupvernxtp {
 cd $HOME/connext/nxtp-router-docker-compose
-read -p "Insert Router Version: " nxtpv 
+read -p "Insert Router Version you want to upgrade to: " nxtpv 
+rm .env &> /dev/null
 cp .env.example .env
 echo " "
-echo -e "\e[1m\e[32mInstall NXTP Version : ${nxtpv}\e[0m" && sleep 1
+echo -e "\e[1m\e[32mInstall NXTP Version: ${nxtpv}\e[0m" && sleep 1
 sed -i 's/latest/'${nxtpv}'/g' .env
 docker pull ghcr.io/connext/router:${nxtpv}
 }
@@ -212,14 +214,26 @@ rm -rf $HOME/connext
 }
 
 
+function check {
+last_image="$(docker image ls --all ghcr.io/connext/router | head -2 | tail -1 |awk {'print $2'})"
+last_release="$(curl -fsSLI -o /dev/null -w %{url_effective} https://github.com/connext/nxtp/releases/latest | awk 'BEGIN{FS="v"} {print $2}')"
+echo " "
+echo -e "\e[1m\e[32mLatest released Router version: $last_release\e[0m"
+echo -e "\e[1m\e[32mLatest docker image version: $last_image\e[0m"
+echo " "
+echo -e "\e[1m\e[32mYour current version: $(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')\e[0m"
+}
+
+
 
 
 PS3='Please enter your choice (input your option number and press enter): '
-options=("Install + Auto PKey" "Install + Your PKey" "Auto Upgrade" "Manual Upgrade" "Backup PKey" "Delete" "Quit")
+options=("Install + Auto PKey" "Install + Your PKey" "Auto Upgrade" "Manual Upgrade" "Backup PKey" "Delete" "Check Version" "Quit")
 
 select opt in "${options[@]}"
 do
     case $opt in
+
         "Install + Auto PKey")
 echo " "
 echo -e '\e[1m\e[32mYou choose Install Router with auto Private Key ...\e[0m' && sleep 1
@@ -241,7 +255,7 @@ echo -e "\e[1m\e[92mHas been saved at $HOME/connext/router_private_key.json\e[0m
 break
 ;;
 
-"Install + Your PKey")
+        "Install + Your PKey")
 echo " "
 echo -e '\e[1m\e[32mYou choose Install Router with your Private Key ...\e[0m' && sleep 1
 Installingrequiredtool
@@ -261,13 +275,13 @@ sleep 1
 break
 ;;
 
-"Auto Upgrade")
+        "Auto Upgrade")
 echo " "
 echo -e '\e[1m\e[32mYou choose Upgrade Version ...\e[0m' && sleep 1
 upgrade
 dockerdown
 #upvernxtp
-dockerpull
+#dockerpull
 dockerup
 #echo -e "\e[1m\e[32mYour Router was upgraded to : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
 echo -e "\e[1m\e[32mYour Router was upgraded to: $(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')\e[0m" && sleep 1
@@ -276,7 +290,7 @@ break
 
 ;;
 
-"Manual Upgrade")
+        "Manual Upgrade")
 echo " "
 echo -e '\e[1m\e[32mYou choose Manual Upgrade Version ...\e[0m' && sleep 1
 dockerdown
@@ -290,21 +304,29 @@ break
 ;;
 
 
-"Backup PKey")
+        "Backup PKey")
 echo " "
 echo -e '\e[1m\e[32mYou choose Backup Private Key ...\e[0m' && sleep 1
 backupPK
 break
 
 ;;
-"Delete")
+
+        "Delete")
 echo " "
 echo -e '\e[1m\e[32mYou choose Delete All Router Files and Data ...\e[0m' && sleep 1
 delete
 break
 
 ;;
-"Quit")
+
+        "Check Version")
+check
+$REPLY
+
+;;
+
+        "Quit")
 break
 ;;
 
