@@ -225,6 +225,12 @@ echo -e "\e[1m\e[32mYour current version: $(cat $HOME/connext/nxtp-router-docker
 }
 
 
+function logs {
+. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n router_log -v "docker logs --follow --tail 100 router" -a
+echo " "
+echo -e "Check logs using command: \e[1m\e[32mrouter_log\e[0m"
+}
+
 
 
 PS3='Please enter your choice (input your option number and press enter): '
@@ -249,9 +255,9 @@ setautokeyfile
 #dockerpull
 dockerup
 echo -e "\e[1m\e[32mYour Router was Install!\e[0m" && sleep 1
-echo -e "Check logs: docker logs --follow --tail 100 router"
 echo -e "\e[1m\e[92mYour Private Key:  \e[0m" $(cat $HOME/connext/router_private_key.json)
 echo -e "\e[1m\e[92mHas been saved at $HOME/connext/router_private_key.json\e[0m" && sleep 1
+logs
 break
 ;;
 
@@ -270,8 +276,7 @@ setyourkeyfile
 #dockerpull
 dockerup
 echo -e "\e[1m\e[32mYour Router was Install!\e[0m" && sleep 1
-echo -e "Check logs: docker logs --follow --tail 100 router"
-sleep 1
+logs
 break
 ;;
 
@@ -281,10 +286,11 @@ echo -e '\e[1m\e[32mYou choose Upgrade Version ...\e[0m' && sleep 1
 upgrade
 dockerdown
 #upvernxtp
-#dockerpull
+dockerpull
 dockerup
 #echo -e "\e[1m\e[32mYour Router was upgraded to : $(cat $HOME/connext/nxtp-router-docker-compose/nxtp.version)\e[0m" && sleep 1
 echo -e "\e[1m\e[32mYour Router was upgraded to: $(cat $HOME/connext/nxtp-router-docker-compose/.env | grep ROUTER_VERSION | awk -F '=' '{print$2}')\e[0m" && sleep 1
+logs
 break
 
 
@@ -298,6 +304,7 @@ manupvernxtp
 dockerpull
 dockerup
 echo -e "\e[1m\e[32mYour Router was upgraded to : ${nxtpv} \e[0m" && sleep 1
+logs
 break
 
 
