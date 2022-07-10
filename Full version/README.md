@@ -2,8 +2,8 @@
 # Spinning up NXTP Router full version guide.
 ## Automatic script, manual installing commands, liquidity providing.
 
-+ Using the automatic script you can spin up a router from scratch or upgrade to the latest or another one version you like to. 
 #### What is in:
++ Using the automatic script you can spin up a router from scratch or upgrade to the latest or another one version you like to. 
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/88688304/178146039-058cacdc-13cb-4bc1-83b8-9ab65dbb4b2a.png">
 
 | №           | Menu | Detail | 
