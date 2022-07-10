@@ -163,10 +163,21 @@ Check logs:
 router_log
 ```
 
-#### Restart Docker:
+#### Restart Docker containers:
 ```
 cd $HOME/connext/nxtp-router-docker-compose
 docker-compose restart
+```
+
+#### Stop all running Docker containers:
+```
+docker stop $(docker ps -a -q)
+```
+
+#### Restart Docker deamon:
+```
+sudo systemctl restart docker
+sudo systemctl status docker
 ```
 
 #### Delete Router and everything relating to it:
