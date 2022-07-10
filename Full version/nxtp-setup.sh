@@ -221,7 +221,7 @@ echo " "
 echo -e "\e[1m\e[32mLatest released Router version: $last_release\e[0m"
 echo -e "\e[1m\e[32mLatest docker image version: $last_image\e[0m"
 echo " "
-echo -e "\e[1m\e[32mYour current version: $(cat $HOME/connext/nxtp-router-docker-compose/.env 2&> /dev/null | grep ROUTER_VERSION | awk -F '=' '{print$2}')\e[0m"
+echo -e "\e[1m\e[32mYour current version: $(cat $HOME/connext/nxtp-router-docker-compose/.env 2> /dev/null | grep ROUTER_VERSION | awk -F '=' '{print$2}')\e[0m"
 }
 
 
