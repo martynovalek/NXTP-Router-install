@@ -239,7 +239,7 @@ Now we have to add liquidity on 3 test chains to our Router and make some transa
 
 ---
 # Usefull links
-All about Routers — link<br/>
-How to deploy your router using helm — [Guide](https://github.com/connext/nxtp-router-helm/tree/amarok)<br/>
-How to setup monitoring for your Router — link guide<br/>
-Security settings — link guide
+- All about Routers — link<br/>
+- How to deploy your router using helm — [Guide](https://github.com/connext/nxtp-router-helm/tree/amarok)<br/>
+- How to setup monitoring for your Router — link guide<br/>
+- Security settings — link guide
